@@ -1,8 +1,8 @@
 const puppeteer = require("puppeteer");
 const fun = require("./inject.js");
 
-const LOGINAME = "13880615404";
-const PASSWORD = "Liao199212";
+const LOGINAME = "";
+const PASSWORD = "";
 
 (async () => {
     const browser = await puppeteer.launch({
