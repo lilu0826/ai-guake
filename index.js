@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 const fun = require("./inject.js");
 
-const LOGINAME = "";
+const LOGIN_NAME = "";
 const PASSWORD = "";
 
 (async () => {
@@ -25,7 +25,7 @@ const PASSWORD = "";
 
     await page.waitForSelector(".submit-btn");
 
-    await page.type("#loginName", LOGINAME);
+    await page.type("#loginName", LOGIN_NAME);
     await page.type("#password", PASSWORD);
 
     await page.click(".submit-btn");
