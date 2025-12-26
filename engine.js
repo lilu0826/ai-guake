@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
-import { fun } from  "./inject.js";
-import { upsertUserData, } from "./db.js";
+import { fun } from "./inject.js";
+import { upsertUserData } from "./db.js";
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 async function run(username, password) {
     const browser = await puppeteer.launch({
@@ -56,8 +56,7 @@ async function run(username, password) {
     console.log("isLogin", isLogin);
     let techerName = Date.now();
     if (isLogin) {
-
-        await upsertUserData({ username, status: "登录成功" })
+        await upsertUserData({ username, status: "登录成功" });
 
         await page.waitForSelector(".courseList", {
             visible: true,
@@ -68,7 +67,7 @@ async function run(username, password) {
             () => document.querySelector("#link > div").innerText
         );
 
-        await upsertUserData({ username, techerName })
+        await upsertUserData({ username, techerName });
 
         await page.exposeFunction("showMsg", (msg) => {
             console.log(techerName, msg);
@@ -88,13 +87,14 @@ async function run(username, password) {
             visible: true,
             timeout: 15000,
         });
+        upsertUserData({ username, status: "学习完成" });
     } else {
-        await upsertUserData({ username, status: "登录失败" })
+        await upsertUserData({ username, status: "登录失败" });
     }
 
     await page.screenshot({ path: `./img/${username}.png` });
 
-    await upsertUserData({ username, img: `/img/${username}.png` })
+    await upsertUserData({ username, img: `/img/${username}.png` });
 
     await browser.close();
 }
@@ -103,7 +103,6 @@ export async function start(username, password) {
     while (true) {
         try {
             await run(username, password);
-            upsertUserData({ username, status: "学习完成" })
             break;
         } catch (error) {
             console.log("error", error);
