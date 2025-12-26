@@ -49,6 +49,7 @@ async function run(username, password) {
                 await page.waitForNavigation();
                 return true;
             }
+            await delay(1000);
             return false;
         })(),
     ]);
