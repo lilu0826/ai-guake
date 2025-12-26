@@ -1,4 +1,4 @@
 node_modules/
 *.png
-img/
+img/*.png
 user.txt
