@@ -6,6 +6,15 @@ async function run(username, password) {
     const browser = await puppeteer.launch({
         headless: true, // true = 无头模式（默认）
         protocolTimeout: 0,
+        args: [
+            "--disable-gpu",
+            "--disable-dev-shm-usage",
+            "--disable-setuid-sandbox",
+            "--no-first-run",
+            "--no-sandbox",
+            "--no-zygote",
+            "--single-process",
+        ],
     });
 
     const page = await browser.newPage();
