@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>加油奥里给</title>
+        <style>
+            :root {
+                color-scheme: dark;
+            }
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: auto;
+                padding: 20px;
+                font-family: sans-serif;
+                background: linear-gradient(135deg, #1f1c2c, #1f1c2c);
+                color: #fff;
+                min-height: 100vh;
+                min-height: 100dvh;
+                max-width: 800px;
+            }
+
+            h3,
+            h4 {
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            a {
+                color: #00f0ff;
+                text-decoration: none;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+
+            a:hover {
+                text-shadow: 0 0 10px #00f0ff;
+            }
+
+            .tips {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 18px;
+                color: #ffde59;
+            }
+
+            .actions {
+                margin-top: 20px;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+            }
+
+            .list {
+                margin-top: 20px;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+            }
+
+            .list ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .list li {
+                margin: 10px 0;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+            }
+
+            .power {
+                text-align: right;
+                margin-top: 30px;
+                font-size: 14px;
+                color: #a0c4ff;
+            }
+            b {
+                color: #00f0ff;
+            }
+            .table-actions {
+                width: 120px;
+            }
+
+            @media (max-width: 600px) {
+                body {
+                    padding: 10px;
+                }
+                .table-actions {
+                    width: 40px;
+                }
+            }
+            .log {
+                margin-top: 20px;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+            }
+            .log textarea {
+                width: 100%;
+                height: 200px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                border: none;
+                color: #fff;
+                font-size: 14px;
+                resize: vertical;
+                font-family: sans-serif;
+                outline: none;
+                scroll-behavior: smooth;
+            }
+
+            .list table {
+                width: 100%;
+                table-layout: fixed;
+                border: 1px solid #00f0ff;
+                border-collapse: collapse;
+            }
+            .list table thead {
+                background-color: #2f1c2c;
+            }
+            .list table th {
+                border: 1px solid #00f0ff;
+                text-align: center;
+            }
+            .list table td {
+                border: 1px solid #00f0ff;
+                text-align: center;
+            }
+            .list table td:first-child {
+                font-weight: bold;
+            }
+            .login-form {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                margin: 20px auto;
+                padding: 20px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                max-width: 400px;
+                border: 1px solid rgba(0, 240, 255, 0.3);
+                box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+            }
+
+            .login-input {
+                padding: 12px 15px;
+                border: 1px solid rgba(0, 240, 255, 0.5);
+                border-radius: 8px;
+                background: rgba(0, 0, 0, 0.2);
+                color: #fff;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                outline: none;
+            }
+
+            .login-input:focus {
+                border-color: #00f0ff;
+                box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+                background: rgba(0, 0, 0, 0.3);
+            }
+
+            .login-btn {
+                padding: 12px;
+                background: linear-gradient(135deg, #00f0ff, #00a8cc);
+                border: none;
+                border-radius: 8px;
+                color: #1f1c2c;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-top: 10px;
+            }
+
+            .login-btn:hover {
+                background: linear-gradient(135deg, #00ccff, #0088aa);
+                box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+                transform: translateY(-2px);
+            }
+
+            .login-btn:active {
+                transform: translateY(0);
+            }
+        </style>
+    </head>
+    <body>
+        <form action="/login" method="post" class="login-form">
+            <input
+                type="text"
+                name="username"
+                placeholder="用户名"
+                class="login-input"
+            />
+            <input
+                type="text"
+                name="password"
+                placeholder="密码"
+                class="login-input"
+            />
+            <input type="submit" value="登录" class="login-btn" />
+        </form>
+        <h3>🌟 状态查询 🌟</h3>
+        <div class="tips">共有<%= total %>名老师正在学习中👇</div>
+        <div class="actions">
+            过滤：
+            <a href="?status=all">全部</a>
+            <a href="?status=finish">已完成</a>
+            <a href="?status=unfinish">未完成</a>
+        </div>
+        <div class="list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>老师名称</th>
+                        <th>账号</th>
+                        <th>状态</th>
+                        <th class="table-actions">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(item=> { %>
+                    <tr>
+                        <td><%= item.techerName %></td>
+                        <td><%= item.username %></td>
+                        <td><%= item.status %></td>
+
+                        <td>
+                            <a href="/start?username=<%= item.username %>"
+                                >开始</a
+                            >
+                            <a target="_blank" href="<%= item.img %>">下载</a>
+                            <a
+                                href="#"
+                                style="color: red"
+                                onclick="handleDelete('<%= item.username %>',event)"
+                                >删除</a
+                            >
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="log">
+            <textarea name="" id="" readonly></textarea>
+        </div>
+
+        <div class="power">--- develop by 帅哥程序猿 💻</div>
+        <script>
+            const ws = new WebSocket("/");
+            ws.onmessage = (e) => {
+                const log = document.querySelector(".log textarea");
+                log.innerHTML += e.data;
+            };
+            function handleDelete(username, event) {
+                event.preventDefault();
+                if (confirm("确定要删除吗？")) {
+                    window.location.href = `/delete?username=${username}`;
+                }
+            }
+        </script>
+    </body>
+</html>

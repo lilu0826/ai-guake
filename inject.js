@@ -1,4 +1,4 @@
-module.exports.start = async function () {
+export const fun =  async function () {
     Object.keys(window).forEach((key) => {
         if (key.startsWith("webpackChunk")) {
             console.log(key);
